@@ -11,7 +11,7 @@
  */
 function tzfield_menu() {
   $items['tzfield/autocomplete'] = array(
-    'title' => 'Time zone field autocomplete',
+    'title' => t('Time zone field autocomplete'),
     'page callback' => 'tzfield_autocomplete',
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
@@ -217,6 +217,7 @@ function tzfield_field_formatter_view($entity_type, $entity, $field, $instance, 
  * Implements hook_field_formatter_settings_form().
  */
 function tzfield_field_formatter_settings_form($field, $instance, $view_mode) {
+  $form = array();
   if ($instance['display'][$view_mode]['type'] == 'tzfield_date') {
     $form['format'] = array(
       '#title' => t('Format'),
@@ -227,4 +228,18 @@ function tzfield_field_formatter_settings_form($field, $instance, $view_mode) {
     );
   }
   return $form;
+}
+
+/**
+ * Implements hook_field_formatter_settings_summary().
+ */
+function tzfield_field_formatter_settings_summary($field, $instance, $view_mode) {
+  $summary = '';
+  if ($instance['display'][$view_mode]['type'] == 'tzfield_date') {
+    $summary = t('Format string: %format<br />Sample date: %date', array(
+      '%format' => $instance['display'][$view_mode]['settings']['format'],
+      '%date' => date_format(date_create(), $instance['display'][$view_mode]['settings']['format']),
+    ));
+  }
+  return $summary;
 }
