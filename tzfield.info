@@ -1,0 +1,6 @@
+; $Id$
+name = Time zone field
+description = Defines a field type for storing time zones.
+dependencies[] = options
+core = 7.x
+files[] = tzfield.module
