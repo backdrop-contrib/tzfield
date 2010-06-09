@@ -3,7 +3,7 @@
 
 /**
  * @file
- * Defines a field type for storing time zones.
+ * Defines a time zone field type.
  */
 
 /**
@@ -11,7 +11,7 @@
  */
 function tzfield_menu() {
   $items['tzfield/autocomplete'] = array(
-    'title' => t('Time zone field autocomplete'),
+    'title' => 'Time zone field autocomplete',
     'page callback' => 'tzfield_autocomplete',
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
@@ -65,11 +65,10 @@ function tzfield_field_schema($field) {
  * Implements hook_field_validate().
  */
 function tzfield_field_validate($entity_type, $entity, $field, $instance, $langcode, $items, &$errors) {
-  $timezones = tzfield_options_list($field);
   foreach ($items as $delta => $item) {
-    if (is_array($item) && !empty($item['value']) && !in_array($item['value'], $timezones)) {
+    if (!empty($item['value']) && ($options = tzfield_options_list($field)) && !isset($options[$item['value']])) {
       $errors[$field['field_name']][$langcode][$delta][] = array(
-        'error' => 'tzfield_invalid',
+        'error' => 'tzfield_illegal_value',
         'message' => t('%name: This time zone is not valid.', array('%name' => t($instance['label']))),
       );
     }
@@ -137,35 +136,26 @@ function tzfield_field_widget_form(&$form, &$form_state, $field, $instance, $lan
 }
 
 /**
- * Menu callback; Retrieve a pipe delimited string of autocomplete suggestions for time zones
+ * Retrieve an array of autocomplete suggestions.
  */
-function tzfield_autocomplete($field_name, $string = '') {
+function tzfield_autocomplete($field_name, $string = '', $arg4 = '', $arg5 = '') {
   $fields = field_info_fields();
   $field = $fields[$field_name];
-  if (arg(4)) {
-    $string .= '/'. arg(4);
+  if ($arg4) {
+    $string .= '/' . $arg4;
   }
-  if (arg(5)) {
-    $string .= '/'. arg(5);
+  if ($arg5) {
+    $string .= '/' . $arg5;
   }
-  $string = trim($string);
-  $string = str_replace(' ', '_', $string);
-  $string = preg_replace(';[^a-z0-9/_-];i', '', $string);
-  $return = $string ? preg_grep(';'. $string .';i', tzfield_options_list($field)) : array();
-  drupal_json_output($return);
+  $string = preg_replace(';[^a-z0-9/_-];i', '', str_replace(' ', '_', trim($string)));
+  drupal_json_output($string ? preg_grep(';'. $string .';i', tzfield_options_list($field)) : array());
 }
 
 /**
  * Implements hook_options_list().
  */
 function tzfield_options_list($field) {
-  $timezones = tzfield_identifiers_list();
-  if (isset($field['settings']['exclude']) && is_array($field['settings']['exclude'])) {
-    return array_diff($timezones, $field['settings']['exclude']);
-  }
-  else {
-    return $timezones;
-  }
+  return empty($field['settings']['exclude']) ? tzfield_identifiers_list() : array_diff(tzfield_identifiers_list(), $field['settings']['exclude']);
 }
 
 /**
@@ -173,8 +163,7 @@ function tzfield_options_list($field) {
  * See http://www.php.net/manual/en/timezones.others.php
  */
 function tzfield_excluded_timezones() {
-  $timezones = tzfield_identifiers_list();
-  return preg_grep(';^((Africa|America|Antarctica|Arctic|Asia|Atlantic|Australia|Europe|Indian|Pacific)/.*|UTC)$;', $timezones, PREG_GREP_INVERT);
+  return preg_grep(';^((Africa|America|Antarctica|Arctic|Asia|Atlantic|Australia|Europe|Indian|Pacific)/.*|UTC)$;', tzfield_identifiers_list(), PREG_GREP_INVERT);
 }
 
 /**
@@ -224,7 +213,7 @@ function tzfield_field_formatter_settings_form($field, $instance, $view_mode) {
       '#type' => 'textfield',
       '#size' => 20,
       '#default_value' => $instance['display'][$view_mode]['settings']['format'],
-      '#description' => t('Enter a <a href="http://www.php.net/manual/en/function.date.php">PHP date format string</a>, for example <code>T</code> to display the current time zone abbreviation.'),
+      '#description' => t('Enter a <a href="http://www.php.net/manual/en/function.date.php">PHP date format string</a>, e.g. <em>T</em> to display the current time zone abbreviation.'),
     );
   }
   return $form;
@@ -242,4 +231,11 @@ function tzfield_field_formatter_settings_summary($field, $instance, $view_mode)
     ));
   }
   return $summary;
+}
+
+/**
+ * Implements hook_field_widget_error().
+ */
+function tzfield_field_widget_error($element, $error, $form, &$form_state) {
+  form_error($element, $error['message']);
 }
