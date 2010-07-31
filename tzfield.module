@@ -239,3 +239,28 @@ function tzfield_field_formatter_settings_summary($field, $instance, $view_mode)
 function tzfield_field_widget_error($element, $error, $form, &$form_state) {
   form_error($element, $error['message']);
 }
+
+/**
+ * Implements hook_content_migrate_field_alter().
+ */
+function tzfield_content_migrate_field_alter(&$field) {
+  // Use tzfield namespace for field type.
+  if ($field['type'] == 'timezone') {
+    $field['type'] = 'tzfield';
+    if ($field['cardinality'] == 0) {
+      $field['cardinality'] = 1;
+    }
+  }
+}
+
+/**
+ * Implements hook_content_migrate_instance_alter().
+ */
+function tzfield_content_migrate_instance_alter(&$instance) {
+  // Select widget now provided by options module.
+  if ($instance['widget_type'] == 'tzfield_select') {
+    $instance['widget_type'] = 'options_select';
+    $instance['widget']['type'] = 'options_select';
+    $instance['widget']['module'] = 'options';
+  }
+}
