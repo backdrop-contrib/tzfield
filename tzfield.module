@@ -263,4 +263,14 @@ function tzfield_content_migrate_instance_alter(&$instance) {
     $instance['widget']['type'] = 'options_select';
     $instance['widget']['module'] = 'options';
   }
+  // Use new date formatter.
+  if ($instance['module'] == 'tzfield') {
+    $formats = array('abbreviation' => 'T', 'medium' => variable_get('date_format_medium', 'D, m/d/Y - H:i'), 'rfc2822' => 'r');
+    foreach ($instance['display'] as $view_mode => $display) {
+      if (isset($formats[$display['type']])) {
+        $instance['display'][$view_mode]['type'] = 'tzfield_date';
+        $instance['display'][$view_mode]['settings']['format'] = $formats[$display['type']];
+      }
+    }
+  }
 }
