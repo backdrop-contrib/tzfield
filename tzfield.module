@@ -195,7 +195,7 @@ function tzfield_field_formatter_view($entity_type, $entity, $field, $instance, 
         // If the date format string contains a character that requires HTML
         // encoding, then for plain text output from this formatter, you will
         // need to HTML decode it.
-        $element[$delta] = array('#markup' => $item['value'] ? check_plain(date_format(date_create('now', timezone_open($item['value'])), $display['settings']['format'])) : '');
+        $element[$delta] = array('#markup' => $item['value'] ? check_plain(date_create('now', timezone_open($item['value']))->format($display['settings']['format'])) : '');
       }
       break;
   }
@@ -227,7 +227,7 @@ function tzfield_field_formatter_settings_summary($field, $instance, $view_mode)
   if ($instance['display'][$view_mode]['type'] == 'tzfield_date') {
     $summary = t('Format string: %format<br />Sample date: %date', array(
       '%format' => $instance['display'][$view_mode]['settings']['format'],
-      '%date' => date_format(date_create(), $instance['display'][$view_mode]['settings']['format']),
+      '%date' => date_create()->format($instance['display'][$view_mode]['settings']['format']),
     ));
   }
   return $summary;
