@@ -65,8 +65,9 @@ function tzfield_field_schema($field) {
  * Implements hook_field_validate().
  */
 function tzfield_field_validate($entity_type, $entity, $field, $instance, $langcode, $items, &$errors) {
+  $options = tzfield_options_list($field);
   foreach ($items as $delta => $item) {
-    if (!empty($item['value']) && ($options = tzfield_options_list($field)) && !isset($options[$item['value']])) {
+    if (!empty($item['value']) && !isset($options[$item['value']])) {
       $errors[$field['field_name']][$langcode][$delta][] = array(
         'error' => 'tzfield_illegal_value',
         'message' => t('%name: This time zone is not valid.', array('%name' => t($instance['label']))),
