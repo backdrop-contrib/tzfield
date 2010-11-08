@@ -3,4 +3,5 @@ name = Time zone field
 description = Defines a time zone field type.
 dependencies[] = options
 core = 7.x
+files[] = tzfield.install
 files[] = tzfield.module

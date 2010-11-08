@@ -51,17 +51,6 @@ function tzfield_field_settings_form($field, $instance, $has_data) {
 }
 
 /**
-* Implements hook_field_schema().
-*/
-function tzfield_field_schema($field) {
-  return array(
-    'columns' => array(
-      'value' => array('type' => 'varchar', 'length' => 32, 'not null' => FALSE, 'sortable' => TRUE),
-    ),
-  );
-}
-
-/**
  * Implements hook_field_validate().
  */
 function tzfield_field_validate($entity_type, $entity, $field, $instance, $langcode, $items, &$errors) {
