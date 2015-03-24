@@ -29,6 +29,7 @@ function tzfield_field_info() {
       'settings' => array('exclude' => tzfield_excluded_timezones()),
       'default_widget' => 'options_select',
       'default_formatter' => 'tzfield_default',
+      'property_type' => 'text',
     ),
   );
 }
