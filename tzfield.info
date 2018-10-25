@@ -4,3 +4,4 @@ dependencies[] = options
 core = 7.x
 files[] = tzfield.install
 files[] = tzfield.module
+files[] = tzfield.test
