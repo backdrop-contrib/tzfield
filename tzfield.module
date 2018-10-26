@@ -208,7 +208,7 @@ function tzfield_field_formatter_view($entity_type, $entity, $field, $instance, 
         // If the date format string contains a character that requires HTML
         // encoding, then for plain text output from this formatter, you will
         // need to HTML decode it.
-        $element[$delta] = array('#markup' => $item['value'] ? check_plain(format_date(REQUEST_TIME, 'custom', $display['settings']['format'], $item['value'])) : '');
+        $element[$delta]['#markup'] = $item['value'] ? check_plain(format_date(REQUEST_TIME, 'custom', $display['settings']['format'], $item['value'])) : '';
       }
       break;
   }
