@@ -68,7 +68,18 @@ function tzfield_geofield_field_attach_presave($entity_type, $entity) {
  * Return timezone by location.
  */
 function _tzfield_geofield_get_timezone($lat, $lon) {
-  $response = file_get_contents('https://maps.googleapis.com/maps/api/timezone/json?location=' . $lat . ',' . $lon . '&timestamp=' . REQUEST_TIME . '&sensor=false');
+  $response = file_get_contents(url('https://maps.googleapis.com/maps/api/timezone/json', array(
+    'query' => array(
+      'location' => $lat . ',' . $lon,
+      'timestamp' => REQUEST_TIME,
+      'sensor' => 'false',
+      // To make API requests, you must set this API key variable.
+      'key' => variable_get('tzfield_geofield_google_timezone_api_key'),
+    ),
+  )));
   $json = json_decode($response);
-  return $json->timeZoneId;
+  if (!isset($json->errorMessage)) {
+    return $json->timeZoneId;
+  }
+  watchdog('tzfield_geofield', 'Google time zone API error %status %error_message', array('%status' => $json->status, '%error_message' => $json->errorMessage), WATCHDOG_ERROR);
 }
