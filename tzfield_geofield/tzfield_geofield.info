@@ -3,3 +3,4 @@ description = Populate Time zone field from Geofield
 core = 7.x
 dependencies[] = tzfield
 dependencies[] = geofield
+files[] = tzfield_geofield.test
