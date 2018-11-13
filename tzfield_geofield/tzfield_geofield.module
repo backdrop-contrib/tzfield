@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Populate Time zone field from Geofield.
+ * Populate a time zone field from Geofield.
  */
 
 /**
