@@ -138,7 +138,10 @@ function tzfield_field_widget_options_select_form_alter(&$element, &$form_state,
     'map_id' => $element['#map_id'],
     'map_src' => file_create_url(drupal_get_path('module', 'timezone_picker') . '/images/map.png'),
   ));
-  $element['#attached']['library'][] = array('timezone_picker', 'jquery.timezone-picker');
+  $element['#attached']['library'][] = array(
+    'timezone_picker',
+    'jquery.timezone-picker',
+  );
   $element['#attached']['css'][] = drupal_get_path('module', 'timezone_picker') . '/timezone-picker.css';
   $element['#attached']['js'][] = drupal_get_path('module', 'timezone_picker') . '/timezone-picker.js';
   $element['#after_build'][] = 'tzfield_timezone_picker_after_build';
