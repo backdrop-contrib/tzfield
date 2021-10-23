@@ -1,5 +1,6 @@
 name = Time Zone Field
 description = Defines a time zone field type.
 dependencies[] = options
+test_dependencies[] = views
 core = 7.x
 files[] = tzfield.test
