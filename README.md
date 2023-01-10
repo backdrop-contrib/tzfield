@@ -28,11 +28,12 @@ zone name and formatted current date formatters.
 
 ## Integrations
 
-If Timezone Picker module is installed, a graphical time zone widget will be
-provided.
+If [Timezone Picker module](https://www.drupal.org/project/timezone_picker) is
+installed, a graphical time zone widget will be provided.
 
-If you use Geofield module, you can use tzfield_geofield module to populate a
-time zone field from a geofield (Google time zone API key required).
+If you use [Geofield module](https://www.drupal.org/project/geofield), you can
+use tzfield_geofield module to populate a time zone field from a geofield
+(Google time zone API key required).
 
 
 ## Maintainers
