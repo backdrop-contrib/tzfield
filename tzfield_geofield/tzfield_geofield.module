@@ -39,6 +39,7 @@ function tzfield_geofield_field_widget_settings_form($field, $instance) {
     '#type' => 'select',
     '#title' => 'Geofield',
     '#options' => $options,
+    // phpcs:ignore
     '#default_value' => isset($widget_settings['geofield']) ? $widget_settings['geofield'] : '',
     '#required' => TRUE,
   );
@@ -50,6 +51,7 @@ function tzfield_geofield_field_widget_settings_form($field, $instance) {
  * Implements hook_field_attach_presave().
  */
 function tzfield_geofield_field_attach_presave($entity_type, $entity) {
+  // phpcs:ignore
   list(,, $bundle_name) = entity_extract_ids($entity_type, $entity);
   foreach (field_info_instances($entity_type, $bundle_name) as $field_name => $field_instance) {
     if ($field_instance['widget']['type'] == 'tzfield_geofield') {

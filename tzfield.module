@@ -119,6 +119,7 @@ function tzfield_field_widget_info_alter(&$info) {
 function tzfield_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
   $element += array(
     '#type' => 'textfield',
+    // phpcs:ignore
     '#default_value' => isset($items[$delta]['value']) ? $items[$delta]['value'] : NULL,
     '#size' => $instance['widget']['settings']['size'],
     '#autocomplete_path' => 'tzfield/autocomplete/' . $field['field_name'],
