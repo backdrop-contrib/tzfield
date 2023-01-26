@@ -25,6 +25,11 @@ field you create, you can select time zones to exclude from the allowed values,
 enable either the autocomplete or select widget, and choose between the time
 zone name and formatted current date formatters.
 
+If you use the included the Time Zone Field Geofield (tzfield_geofield) module,
+you must manually configure it, e.g. using Drush:
+
+    drush vset tzfield_geofield_google_timezone_api_key YOUR_API_KEY
+
 
 ## Integrations
 
