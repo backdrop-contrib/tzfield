@@ -15,7 +15,7 @@ No special requirements.
 
 ## Installation
 
-Install as you would normally install a contributed Drupal module.
+Install as you would normally install a contributed Backdrop module.
 
 
 ## Configuration
@@ -25,26 +25,6 @@ field you create, you can select time zones to exclude from the allowed values,
 enable either the autocomplete or select widget, and choose between the time
 zone name and formatted current date formatters.
 
-If you use the included the Time Zone Field Geofield (tzfield_geofield) module,
-you must manually configure it, e.g. using Drush:
-
-    drush vset tzfield_geofield_google_timezone_api_key YOUR_API_KEY
-
-
-## Integrations
-
-If [Timezone Picker module](https://www.drupal.org/project/timezone_picker) is
-installed, a graphical time zone widget will be provided.
-
-If you use [Geofield module](https://www.drupal.org/project/geofield), you can
-use tzfield_geofield module to populate a time zone field from a geofield
-(Google time zone API key required).
-
-
 ## Maintainers
 
-This module is maintained by [mfb](https://www.drupal.org/u/mfb).
-
-You can support development by
-[contributing](https://www.drupal.org/project/issues/tzfield) or
-[sponsoring](https://github.com/sponsors/mfb).
+The [Drupal version of this module]((https://www.drupal.org/project/issues/tzfield)) is maintained by [mfb](https://www.drupal.org/u/mfb).

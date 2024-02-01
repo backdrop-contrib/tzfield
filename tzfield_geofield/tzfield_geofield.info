@@ -1,7 +1,0 @@
-name = Time Zone Field Geofield
-description = Populate a time zone field from Geofield.
-core = 7.x
-dependencies[] = tzfield
-dependencies[] = geofield
-test_dependencies[] = views
-files[] = tzfield_geofield.test
