@@ -1,4 +1,5 @@
-# Time Zone Field
+Time Zone Field
+======================
 
 Time Zone Field (tzfield) provides an autocomplete or select field for storing
 time zones. It could be useful if, for example, you have a node type
@@ -7,24 +8,33 @@ associate a time zone with these nodes. Time zone data is stored in the standard
 [tz database](https://en.wikipedia.org/wiki/Tz_database) format, e.g.
 `Europe/London`.
 
+Installation
+------------
 
-## Requirements
+- Install this module using the official Backdrop CMS instructions at
+  https://docs.backdropcms.org/documentation/extend-with-modules.
 
-No special requirements.
+Issues
+------
 
+Bugs and feature requests should be reported in [the Issue Queue](https://github.com/backdrop-contrib/tzfield/issues).
 
-## Installation
+Current Maintainers
+-------------------
 
-Install as you would normally install a contributed Backdrop module.
+- [Eli Lisseck](https://github.com/elisseck)
+- [Peter Haight](https://github.com/Dawnthorn)
+- [Anthony Nemirovsky](https://github.com/anemirovsky)
 
+Credits
+-------
 
-## Configuration
+- Backdrop development supported by [Giant Rabbit](https://giantrabbit.com).
+- Ported to Backdrop CMS by [Christopher Yu](https://github.com/christopher-yu).
+- The [Drupal version of this module]((https://www.drupal.org/project/issues/tzfield)) is maintained by [mfb](https://www.drupal.org/u/mfb).
 
-This module has no configuration, aside from field settings. For each time zone
-field you create, you can select time zones to exclude from the allowed values,
-enable either the autocomplete or select widget, and choose between the time
-zone name and formatted current date formatters.
+License
+-------
 
-## Maintainers
-
-The [Drupal version of this module]((https://www.drupal.org/project/issues/tzfield)) is maintained by [mfb](https://www.drupal.org/u/mfb).
+This project is GPL v2 software.
+See the LICENSE.txt file in this directory for complete text.
